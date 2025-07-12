@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Handle Availability Checker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .available {
+      color: green;
+    }
+    .taken {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>Check Handle Availability</h2>
+  <input type="text" id="handleInput" placeholder="Enter a handle (e.g. mybrand)" />
+  <button onclick="checkAvailability()">Check</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    async function checkURL(url) {
+      try {
+        const response = await fetch("https://corsproxy.io/?" + url, { method: 'HEAD' });
+        return response.status === 404;
+      } catch (error) {
+        return true; // treat network errors as available
+      }
+    }
+
+    async function checkDomain(domain) {
+      try {
+        await fetch("https://" + domain, { mode: "no-cors" });
+        return false; // if it loads, assume taken
+      } catch (error) {
+        return true; // network error -> likely available
+      }
+    }
+
+    async function checkAvailability() {
+      const input = document.getElementById('handleInput').value.trim().toLowerCase();
+      const resultDiv = document.getElementById('result');
+      if (!input) {
+        resultDiv.innerHTML = '<p style="color:red;">Please enter a handle.</p>';
+        return;
+      }
+
+      resultDiv.innerHTML = 'Checking...';
+
+      const startTime = performance.now();
+
+      const twitter = await checkURL(`https://twitter.com/${input}`);
+      const instagram = await checkURL(`https://instagram.com/${input}`);
+      const domainCom = await checkDomain(`${input}.com`);
+      const domainNet = await checkDomain(`${input}.net`);
+      const domainIn = await checkDomain(`${input}.in`);
+      const domainOrg = await checkDomain(`${input}.org`);
+      const domainIo = await checkDomain(`${input}.io`);
+      const domainAi = await checkDomain(`${input}.ai`);
+      const domainXyz = await checkDomain(`${input}.xyz`);
+      const domainOnline = await checkDomain(`${input}.online`);
+      const domainCoin = await checkDomain(`${input}.co.in`);
+      const domainBiz = await checkDomain(`${input}.biz`);
+      const domainDev = await checkDomain(`${input}.dev`);
+      const domainShop = await checkDomain(`${input}.shop`);
+
+      const endTime = performance.now();
+      const timeTaken = ((endTime - startTime) / 1000).toFixed(2);
+
+      resultDiv.innerHTML = `
+        <p>Twitter: <span class="${twitter ? 'available' : 'taken'}">${twitter ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>Instagram: <span class="${instagram ? 'available' : 'taken'}">${instagram ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.com Domain: <span class="${domainCom ? 'available' : 'taken'}">${domainCom ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.net Domain: <span class="${domainNet ? 'available' : 'taken'}">${domainNet ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.in Domain: <span class="${domainIn ? 'available' : 'taken'}">${domainIn ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.org Domain: <span class="${domainOrg ? 'available' : 'taken'}">${domainOrg ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.io Domain: <span class="${domainIo ? 'available' : 'taken'}">${domainIo ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.ai Domain: <span class="${domainAi ? 'available' : 'taken'}">${domainAi ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.xyz Domain: <span class="${domainXyz ? 'available' : 'taken'}">${domainXyz ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.online Domain: <span class="${domainOnline ? 'available' : 'taken'}">${domainOnline ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.co.in Domain: <span class="${domainCoin ? 'available' : 'taken'}">${domainCoin ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.biz Domain: <span class="${domainBiz ? 'available' : 'taken'}">${domainBiz ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.dev Domain: <span class="${domainDev ? 'available' : 'taken'}">${domainDev ? '✅ Available' : '❌ Taken'}</span></p>
+        <p>.shop Domain: <span class="${domainShop ? 'available' : 'taken'}">${domainShop ? '✅ Available' : '❌ Taken'}</span></p>
+      `;
+      resultDiv.innerHTML += `<p style="margin-top:1rem;">⏱ Checked in ${timeTaken} seconds</p>`;
+    }
+  </script>
+</body>
+</html>
