@@ -79,6 +79,14 @@
 						<div class="hero-copy">
 	                        <h1 class="hero-title mt-0">Landing template for startups</h1>
 	                        <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
+							<!-- Handle checker UI start -->
+							<input type="text" id="handleInput" placeholder="Enter a handle (e.g. mybrand)" style="padding: 10px; margin-bottom: 1rem; width: 100%; max-width: 300px;">
+							<div class="cta-buttons">
+								<a class="button button-primary" href="#" onclick="checkAvailability()">Check Availability</a>
+							</div>
+							<div class="result" id="result" style="margin-top: 1rem;"></div>
+							<button id="showMoreBtn" style="display:none; margin-top: 0.5rem;" onclick="checkAdditionalDomains()">Show More</button>
+							<!-- Handle checker UI end -->
 							<div class="hero-form field field-grouped">
 								<div class="control control-expanded">
 									<input class="input" type="email" name="email" placeholder="Your best email&hellip;">
@@ -553,6 +561,158 @@
         </footer>
     </div>
 
+</div>
     <script src="dist/js/main.min.js"></script>
+    <script>
+// --- Handle checker logic ---
+// Utility: Validate handle
+function isValidHandle(handle) {
+    return /^[a-zA-Z0-9][a-zA-Z0-9\-]{1,30}[a-zA-Z0-9]$/.test(handle);
+}
+
+// Utility: Validate domain
+function isValidDomain(domain) {
+    // Simple regex for domain (not for full validation)
+    return /^[a-zA-Z0-9\-]{1,63}\.[a-zA-Z]{2,}$/.test(domain);
+}
+
+// Simulate checking a username/handle on a platform (returns Promise)
+function checkURL(handle, platform) {
+    // Simulate async check: resolve true (available) or false (taken)
+    // For demo, pretend handles ending in 'x' are taken
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            if (handle.toLowerCase().endsWith('x')) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        }, 350 + Math.random() * 200);
+    });
+}
+
+// Simulate checking a domain (returns Promise)
+function checkDomain(domain) {
+    // For demo: domains containing 'test' are taken
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            if (domain.toLowerCase().includes('test')) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        }, 350 + Math.random() * 200);
+    });
+}
+
+// Main checkAvailability function
+function checkAvailability() {
+    var handle = document.getElementById('handleInput').value.trim();
+    var resultDiv = document.getElementById('result');
+    var showMoreBtn = document.getElementById('showMoreBtn');
+    showMoreBtn.style.display = 'none';
+    resultDiv.innerHTML = '';
+    if (!isValidHandle(handle)) {
+        resultDiv.innerHTML = '<span style="color:red;">Please enter a valid handle (letters, numbers, dashes, 3-32 chars, no leading/trailing dash).</span>';
+        return;
+    }
+    var start = Date.now();
+    // Platforms and domains to check
+    var platforms = [
+        { name: 'Twitter', url: 'https://twitter.com/' },
+        { name: 'Instagram', url: 'https://instagram.com/' },
+        { name: 'GitHub', url: 'https://github.com/' },
+    ];
+    var domains = [
+        { tld: '.com' },
+        { tld: '.net' },
+        { tld: '.io' },
+    ];
+    var checks = [];
+    // Check platforms
+    platforms.forEach(function(plat) {
+        checks.push(
+            checkURL(handle, plat.name).then(function(avail) {
+                return { type: 'platform', name: plat.name, url: plat.url + handle, available: avail };
+            })
+        );
+    });
+    // Check domains
+    domains.forEach(function(dom) {
+        var domainName = handle.toLowerCase() + dom.tld;
+        checks.push(
+            checkDomain(domainName).then(function(avail) {
+                return { type: 'domain', name: domainName, available: avail };
+            })
+        );
+    });
+    resultDiv.innerHTML = '<span style="color:#888;">Checking availability...</span>';
+    Promise.all(checks).then(function(results) {
+        var elapsed = Date.now() - start;
+        var html = '<ul style="list-style:none; padding:0;">';
+        results.forEach(function(res) {
+            if (res.type === 'platform') {
+                html += '<li>' +
+                    '<b>' + res.name + ':</b> ' +
+                    (res.available
+                        ? '<span style="color:green;">Available</span> <a href="' + res.url + '" target="_blank" style="font-size:90%;">View</a>'
+                        : '<span style="color:red;">Taken</span> <a href="' + res.url + '" target="_blank" style="font-size:90%;">Check</a>'
+                    ) +
+                    '</li>';
+            } else if (res.type === 'domain') {
+                html += '<li>' +
+                    '<b>' + res.name + ':</b> ' +
+                    (res.available
+                        ? '<span style="color:green;">Available</span> <a href="https://' + res.name + '" target="_blank" style="font-size:90%;">Visit</a>'
+                        : '<span style="color:red;">Taken</span>'
+                    ) +
+                    '</li>';
+            }
+        });
+        html += '</ul>';
+        html += '<div style="font-size:90%; color:#888;">Checked in ' + elapsed + ' ms.</div>';
+        resultDiv.innerHTML = html;
+        showMoreBtn.style.display = '';
+        // Store handle for showMore
+        showMoreBtn._handle = handle;
+    });
+}
+
+// Show more domains on click
+function checkAdditionalDomains() {
+    var showMoreBtn = document.getElementById('showMoreBtn');
+    var handle = showMoreBtn._handle || document.getElementById('handleInput').value.trim();
+    var resultDiv = document.getElementById('result');
+    if (!isValidHandle(handle)) {
+        resultDiv.innerHTML = '<span style="color:red;">Please enter a valid handle.</span>';
+        return;
+    }
+    showMoreBtn.disabled = true;
+    var tlds = ['.co', '.app', '.dev', '.ai', '.org', '.xyz'];
+    var checks = tlds.map(function(tld) {
+        var domainName = handle.toLowerCase() + tld;
+        return checkDomain(domainName).then(function(avail) {
+            return { domain: domainName, available: avail };
+        });
+    });
+    resultDiv.innerHTML += '<div style="color:#888;">Checking more domains...</div>';
+    Promise.all(checks).then(function(results) {
+        var html = '<ul style="list-style:none; padding:0;">';
+        results.forEach(function(res) {
+            html += '<li>' +
+                '<b>' + res.domain + ':</b> ' +
+                (res.available
+                    ? '<span style="color:green;">Available</span> <a href="https://' + res.domain + '" target="_blank" style="font-size:90%;">Visit</a>'
+                    : '<span style="color:red;">Taken</span>'
+                ) +
+                '</li>';
+        });
+        html += '</ul>';
+        resultDiv.innerHTML += html;
+        showMoreBtn.disabled = false;
+        showMoreBtn.style.display = 'none';
+    });
+}
+    </script>
 </body>
 </html>
