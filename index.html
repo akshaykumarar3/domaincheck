@@ -2,12 +2,12 @@
 <html lang="en" class="no-js">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solid Template</title>
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
-  <link rel="stylesheet" href="dist/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet" />
+  <link rel="stylesheet" href="dist/css/style.css" />
   <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
   <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
@@ -20,10 +20,21 @@
           <div class="brand header-brand">
             <h1 class="m-0">
               <a href="#">
-                <img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
+                <img class="header-logo-image" src="dist/images/logo.svg" alt="Logo" />
               </a>
             </h1>
           </div>
+          <ul class="header-links list-reset">
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+          </ul>
         </div>
       </div>
     </header>
@@ -34,17 +45,14 @@
           <div class="hero-inner">
             <div class="hero-copy">
               <h1 class="hero-title mt-0">Check Handle Availability</h1>
-              <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up
-                once, and get beautiful results forever.</p>
-              <input type="text" id="handleInput" placeholder="Enter a handle (e.g. mybrand)"
-                style="padding: 10px; margin-bottom: 1rem; width: 100%; max-width: 300px;">
+              <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
+              <input type="text" id="handleInput" placeholder="Enter a handle (e.g. mybrand)" style="padding: 10px; margin-bottom: 1rem; width: 100%; max-width: 300px;" />
               <div class="hero-cta">
                 <a class="button button-primary" href="#" onclick="checkAvailability()">Check Availability</a>
                 <a class="button" href="#">Get in touch</a>
               </div>
               <div class="result" id="result" style="margin-top: 1rem;"></div>
-              <button id="showMoreBtn" style="display:none; margin-top: 0.5rem;" onclick="checkAdditionalDomains()">Show
-                More</button>
+              <button id="showMoreBtn" style="display:none; margin-top: 0.5rem;" onclick="checkAdditionalDomains()">Show More</button>
             </div>
             <div class="hero-figure anime-element">
               <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
@@ -65,7 +73,37 @@
         </div>
       </section>
 
-      <!-- Other theme sections remain unchanged -->
+      <section class="features">
+        <div class="container">
+          <div class="features-inner section-inner has-bottom-divider">
+            <div class="features-wrap">
+              <div class="feature text-center is-revealing">
+                <div class="feature-icon">
+                  <img src="dist/images/feature-icon-01.svg" alt="Feature 1" />
+                </div>
+                <h4 class="feature-title mt-24">Fast Checks</h4>
+                <p class="text-sm mb-0">Get instant availability results for your desired handle and domains.</p>
+              </div>
+              <div class="feature text-center is-revealing">
+                <div class="feature-icon">
+                  <img src="dist/images/feature-icon-02.svg" alt="Feature 2" />
+                </div>
+                <h4 class="feature-title mt-24">Multiple Platforms</h4>
+                <p class="text-sm mb-0">Check availability across social media and various domain extensions.</p>
+              </div>
+              <div class="feature text-center is-revealing">
+                <div class="feature-icon">
+                  <img src="dist/images/feature-icon-03.svg" alt="Feature 3" />
+                </div>
+                <h4 class="feature-title mt-24">User Friendly</h4>
+                <p class="text-sm mb-0">Easy to use interface for everyone to check and secure their brand identity.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Additional sections can be added here -->
 
     </main>
 
@@ -74,10 +112,21 @@
         <div class="site-footer-inner">
           <div class="brand footer-brand">
             <a href="#">
-              <img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
+              <img class="header-logo-image" src="dist/images/logo.svg" alt="Logo" />
             </a>
           </div>
-          <!-- Footer links remain unchanged -->
+          <ul class="footer-links list-reset">
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+          </ul>
+          <div class="footer-copyright">&copy; 2024 Your Company. All rights reserved.</div>
         </div>
       </div>
     </footer>

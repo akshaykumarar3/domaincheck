@@ -48,11 +48,11 @@
 	            @include font-size(8, desktop, true, false, true);
 	        }
 	    }
-	    @include font-weight(semibold);
+	    @include font-weight(bold);
+		text-transform: uppercase;
 	    line-height: 16px;
 	    text-decoration: none;
-		text-transform: uppercase;
-	    background-color: color(bg, 2);
+	    background-color: color(bg, 1);
 	    color: color(primary, 1) !important;
 	    border: none;
 		height: auto;
@@ -83,6 +83,10 @@
 
 .text-primary {
     color: color(primary, 1);
+}
+
+.text-secondary {
+    color: color(secondary, 1);
 }
 
 .has-top-divider {

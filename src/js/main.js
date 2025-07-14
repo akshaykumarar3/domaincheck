@@ -1,5 +1,4 @@
 (function () {
-  const win = window
   const doc = document.documentElement
 
   doc.classList.remove('no-js')
@@ -10,62 +9,85 @@
     /* global ScrollReveal */
     const sr = window.sr = ScrollReveal()
 
-    sr.reveal('.feature, .pricing-table-inner', {
+    sr.reveal('.feature, .testimonial', {
       duration: 600,
-      distance: '20px',
+      distance: '50px',
       easing: 'cubic-bezier(0.5, -0.01, 0, 1.005)',
       origin: 'bottom',
       interval: 100
     })
 
-    doc.classList.add('anime-ready')
     /* global anime */
-    anime.timeline({
-      targets: '.hero-figure-box-05'
+    const heroAnimation = anime.timeline({ autoplay: false })
+    const strokedElement = document.querySelector('.stroke-animation')
+
+    strokedElement.setAttribute('stroke-dashoffset', anime.setDashoffset(strokedElement))
+
+    heroAnimation.add({
+      targets: '.stroke-animation',
+      strokeDashoffset: {
+        value: 0,
+        duration: 2000,
+        easing: 'easeInOutQuart'
+      },
+      strokeWidth: {
+        value: [0, 2],
+        duration: 2000,
+        easing: 'easeOutCubic'
+      },
+      strokeOpacity: {
+        value: [1, 0],
+        duration: 1000,
+        easing: 'easeOutCubic',
+        delay: 1000
+      },
+      fillOpacity: {
+        value: [0, 1],
+        duration: 500,
+        easing: 'easeOutCubic',
+        delay: 1300
+      }
     }).add({
-      duration: 400,
-      easing: 'easeInOutExpo',
-      scaleX: [0.05, 0.05],
-      scaleY: [0, 1],
-      perspective: '500px',
-      delay: anime.random(0, 400)
+      targets: '.fadeup-animation',
+      offset: 1300, // Starts at 1300ms of the timeline
+      translateY: {
+        value: [100, 0],
+        duration: 1500,
+        easing: 'easeOutElastic',
+        delay: function (el, i) {
+          return i * 150
+        }
+      },
+      opacity: {
+        value: [0, 1],
+        duration: 200,
+        easing: 'linear',
+        delay: function (el, i) {
+          return i * 150
+        }
+      }
     }).add({
-      duration: 400,
-      easing: 'easeInOutExpo',
-      scaleX: 1
-    }).add({
-      duration: 800,
-      rotateY: '-15deg',
-      rotateX: '8deg',
-      rotateZ: '-1deg'
+      targets: '.fadeleft-animation',
+      offset: 1300, // Starts at 1300ms of the timeline
+      translateX: {
+        value: [40, 0],
+        duration: 400,
+        easing: 'easeOutCubic',
+        delay: function (el, i) {
+          return i * 100
+        }
+      },
+      opacity: {
+        value: [0, 1],
+        duration: 200,
+        easing: 'linear',
+        delay: function (el, i) {
+          return i * 100
+        }
+      }
     })
 
-    anime.timeline({
-      targets: '.hero-figure-box-06, .hero-figure-box-07'
-    }).add({
-      duration: 400,
-      easing: 'easeInOutExpo',
-      scaleX: [0.05, 0.05],
-      scaleY: [0, 1],
-      perspective: '500px',
-      delay: anime.random(0, 400)
-    }).add({
-      duration: 400,
-      easing: 'easeInOutExpo',
-      scaleX: 1
-    }).add({
-      duration: 800,
-      rotateZ: '20deg'
-    })
-
-    anime({
-      targets: '.hero-figure-box-01, .hero-figure-box-02, .hero-figure-box-03, .hero-figure-box-04, .hero-figure-box-08, .hero-figure-box-09, .hero-figure-box-10',
-      duration: anime.random(600, 800),
-      delay: anime.random(600, 800),
-      rotate: [ anime.random(-360, 360), function (el) { return el.getAttribute('data-rotation') } ],
-      scale: [0.7, 1],
-      opacity: [0, 1],
-      easing: 'easeInOutExpo'
-    })
+    doc.classList.add('anime-ready')
+    heroAnimation.play()
   }
 }())

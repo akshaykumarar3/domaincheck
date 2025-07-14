@@ -1,5 +1,20 @@
 .site-header {
+    position: relative;
     padding: 24px 0;
+}
+
+.header-shape {
+	position: absolute;
+}
+
+.header-shape-1 {
+	display: none;
+	top: 0;
+}
+
+.header-shape-2 {
+	top: -40px;
+	right: -53px;
 }
 
 .site-header-inner {
@@ -23,7 +38,7 @@
                 @include font-size(7, desktop, true, true, true);
             }
         }
-        @include font-weight(semibold);
+        @include font-weight(bold);
         @include anchor-aspect(header);
         line-height: 16px;
         padding: 8px 24px;
@@ -32,22 +47,32 @@
 
 @include media( '>medium' ) {
 
-	.site-header {
-		position: relative;
+	.header-shape-1 {
+		display: block;
+		left: 687px;
+	}
 
-		&::before {
-			content: '';
-			position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    height: 700px;
-		    background: color(bg, 3);
-		    background: linear-gradient(80deg, rgba(color(bg, 3), .5) 0%, rgba(color(bg, 3), 0) 100%);
-		    -webkit-transform-origin: 0;
-		    transform-origin: 0;
-		    -webkit-transform: skewY(-12deg);
-		    transform: skewY(-12deg);
+	.header-shape-2 {
+		top: -92px;
+		left: 440px;
+		right: auto;
+
+		svg {
+			width: 220px;
+			height: 220px;
 		}
+	}
+}
+
+@include media( '>large' ) {
+
+	.header-shape-1 {
+		left: auto;
+		right: 0;
+	}
+
+	.header-shape-2 {
+		left: auto;
+		right: 38%;
 	}
 }

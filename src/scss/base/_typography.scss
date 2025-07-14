@@ -240,7 +240,7 @@ small {
 
 b,
 strong {
-	@include font-weight(semibold);
+	@include font-weight(bold);
 }
 
 button,
