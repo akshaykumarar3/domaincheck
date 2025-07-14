@@ -1,126 +1,131 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Solid Template</title>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/style.css">
-	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solid Template</title>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
+
 <body class="is-boxed has-animations">
-    <div class="body-wrap">
-        <header class="site-header">
-            <div class="container">
-                <div class="site-header-inner">
-                    <div class="brand header-brand">
-                        <h1 class="m-0">
-							<a href="#">
-								<img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
-                            </a>
-                        </h1>
-                    </div>
-                </div>
+  <div class="body-wrap">
+    <header class="site-header">
+      <div class="container">
+        <div class="site-header-inner">
+          <div class="brand header-brand">
+            <h1 class="m-0">
+              <a href="#">
+                <img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
+              </a>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <h1 class="hero-title mt-0">Check Handle Availability</h1>
+              <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up
+                once, and get beautiful results forever.</p>
+              <input type="text" id="handleInput" placeholder="Enter a handle (e.g. mybrand)"
+                style="padding: 10px; margin-bottom: 1rem; width: 100%; max-width: 300px;">
+              <div class="hero-cta">
+                <a class="button button-primary" href="#" onclick="checkAvailability()">Check Availability</a>
+                <a class="button" href="#">Get in touch</a>
+              </div>
+              <div class="result" id="result" style="margin-top: 1rem;"></div>
+              <button id="showMoreBtn" style="display:none; margin-top: 0.5rem;" onclick="checkAdditionalDomains()">Show
+                More</button>
             </div>
-        </header>
-
-        <main>
-            <section class="hero">
-                <div class="container">
-                    <div class="hero-inner">
-						<div class="hero-copy">
-                            <h1 class="hero-title mt-0">Check Handle Availability</h1>
-                            <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
-                            <input type="text" id="handleInput" placeholder="Enter a handle (e.g. mybrand)" style="padding: 10px; margin-bottom: 1rem; width: 100%; max-width: 300px;">
-                            <div class="hero-cta">
-                                <a class="button button-primary" href="#" onclick="checkAvailability()">Check Availability</a>
-                                <a class="button" href="#">Get in touch</a>
-                            </div>
-                            <div class="result" id="result" style="margin-top: 1rem;"></div>
-                            <button id="showMoreBtn" style="display:none; margin-top: 0.5rem;" onclick="checkAdditionalDomains()">Show More</button>
-						</div>
-						<div class="hero-figure anime-element">
-                            <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
-                                <rect width="528" height="396" style="fill:transparent;" />
-                            </svg>
-                            <div class="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
-                            <div class="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
-                            <div class="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
-                            <div class="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
-                            <div class="hero-figure-box hero-figure-box-05"></div>
-                            <div class="hero-figure-box hero-figure-box-06"></div>
-                            <div class="hero-figure-box hero-figure-box-07"></div>
-                            <div class="hero-figure-box hero-figure-box-08" data-rotation="-22deg"></div>
-                            <div class="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
-                            <div class="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Other theme sections remain unchanged -->
-
-        </main>
-
-        <footer class="site-footer">
-            <div class="container">
-                <div class="site-footer-inner">
-                    <div class="brand footer-brand">
-						<a href="#">
-							<img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
-						</a>
-                    </div>
-                    <!-- Footer links remain unchanged -->
-                </div>
+            <div class="hero-figure anime-element">
+              <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
+                <rect width="528" height="396" style="fill:transparent;" />
+              </svg>
+              <div class="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
+              <div class="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
+              <div class="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
+              <div class="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
+              <div class="hero-figure-box hero-figure-box-05"></div>
+              <div class="hero-figure-box hero-figure-box-06"></div>
+              <div class="hero-figure-box hero-figure-box-07"></div>
+              <div class="hero-figure-box hero-figure-box-08" data-rotation="-22deg"></div>
+              <div class="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
+              <div class="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
             </div>
-        </footer>
-    </div>
+          </div>
+        </div>
+      </section>
 
-    <script src="dist/js/main.min.js"></script>
-    <script>
-      async function checkURL(url) {
-        try {
-          const response = await fetch("https://corsproxy.io/?" + url, { method: 'HEAD' });
-          return response.status === 404;
-        } catch (error) {
-          return true;
-        }
+      <!-- Other theme sections remain unchanged -->
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="site-footer-inner">
+          <div class="brand footer-brand">
+            <a href="#">
+              <img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
+            </a>
+          </div>
+          <!-- Footer links remain unchanged -->
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="dist/js/main.min.js"></script>
+  <script>
+    async function checkURL(url) {
+      try {
+        const response = await fetch("https://corsproxy.io/?" + url, { method: 'HEAD' });
+        return response.status === 404;
+      } catch (error) {
+        return true;
+      }
+    }
+
+    async function checkDomain(domain) {
+      try {
+        await fetch("https://" + domain, { mode: "no-cors" });
+        return false;
+      } catch (error) {
+        return true;
+      }
+    }
+
+    async function checkAvailability() {
+      const input = document.getElementById('handleInput').value.trim().toLowerCase();
+      const resultDiv = document.getElementById('result');
+      if (!input) {
+        resultDiv.innerHTML = '<p style="color:red;">Please enter a handle.</p>';
+        return;
       }
 
-      async function checkDomain(domain) {
-        try {
-          await fetch("https://" + domain, { mode: "no-cors" });
-          return false;
-        } catch (error) {
-          return true;
-        }
-      }
+      resultDiv.innerHTML = 'Checking...';
+      const startTime = performance.now();
 
-      async function checkAvailability() {
-        const input = document.getElementById('handleInput').value.trim().toLowerCase();
-        const resultDiv = document.getElementById('result');
-        if (!input) {
-          resultDiv.innerHTML = '<p style="color:red;">Please enter a handle.</p>';
-          return;
-        }
+      const twitter = await checkURL(`https://twitter.com/${input}`);
+      const instagram = await checkURL(`https://instagram.com/${input}`);
+      const domainCom = await checkDomain(`${input}.com`);
+      const domainNet = await checkDomain(`${input}.net`);
+      const domainOrg = await checkDomain(`${input}.org`);
+      const domainIn = await checkDomain(`${input}.in`);
+      const domainIo = await checkDomain(`${input}.io`);
 
-        resultDiv.innerHTML = 'Checking...';
-        const startTime = performance.now();
+      const endTime = performance.now();
+      const timeTaken = ((endTime - startTime) / 1000).toFixed(2);
 
-        const twitter = await checkURL(`https://twitter.com/${input}`);
-        const instagram = await checkURL(`https://instagram.com/${input}`);
-        const domainCom = await checkDomain(`${input}.com`);
-        const domainNet = await checkDomain(`${input}.net`);
-        const domainOrg = await checkDomain(`${input}.org`);
-        const domainIn = await checkDomain(`${input}.in`);
-        const domainIo = await checkDomain(`${input}.io`);
-
-        const endTime = performance.now();
-        const timeTaken = ((endTime - startTime) / 1000).toFixed(2);
-
-        resultDiv.innerHTML = `
+      resultDiv.innerHTML = `
           <p>Twitter: <span class="${twitter ? 'available' : 'taken'}">${twitter ? '✅ Available' : '❌ Taken'}</span></p>
           <p>Instagram: <span class="${instagram ? 'available' : 'taken'}">${instagram ? '✅ Available' : '❌ Taken'}</span></p>
           <p>.com Domain: <span class="${domainCom ? 'available' : 'taken'}">${domainCom ? '✅ Available' : '❌ Taken'}</span></p>
@@ -130,21 +135,21 @@
           <p>.io Domain: <span class="${domainIo ? 'available' : 'taken'}">${domainIo ? '✅ Available' : '❌ Taken'}</span></p>
           <p style="margin-top:1rem;">⏱ Checked in ${timeTaken} seconds</p>
         `;
-        document.getElementById("showMoreBtn").style.display = "block";
-      }
+      document.getElementById("showMoreBtn").style.display = "block";
+    }
 
-      async function checkAdditionalDomains() {
-        const input = document.getElementById('handleInput').value.trim().toLowerCase();
-        const resultDiv = document.getElementById('result');
-        const domainAi = await checkDomain(`${input}.ai`);
-        const domainXyz = await checkDomain(`${input}.xyz`);
-        const domainOnline = await checkDomain(`${input}.online`);
-        const domainCoin = await checkDomain(`${input}.co.in`);
-        const domainBiz = await checkDomain(`${input}.biz`);
-        const domainDev = await checkDomain(`${input}.dev`);
-        const domainShop = await checkDomain(`${input}.shop`);
+    async function checkAdditionalDomains() {
+      const input = document.getElementById('handleInput').value.trim().toLowerCase();
+      const resultDiv = document.getElementById('result');
+      const domainAi = await checkDomain(`${input}.ai`);
+      const domainXyz = await checkDomain(`${input}.xyz`);
+      const domainOnline = await checkDomain(`${input}.online`);
+      const domainCoin = await checkDomain(`${input}.co.in`);
+      const domainBiz = await checkDomain(`${input}.biz`);
+      const domainDev = await checkDomain(`${input}.dev`);
+      const domainShop = await checkDomain(`${input}.shop`);
 
-        resultDiv.innerHTML += `
+      resultDiv.innerHTML += `
           <p>.ai Domain: <span class="${domainAi ? 'available' : 'taken'}">${domainAi ? '✅ Available' : '❌ Taken'}</span></p>
           <p>.xyz Domain: <span class="${domainXyz ? 'available' : 'taken'}">${domainXyz ? '✅ Available' : '❌ Taken'}</span></p>
           <p>.online Domain: <span class="${domainOnline ? 'available' : 'taken'}">${domainOnline ? '✅ Available' : '❌ Taken'}</span></p>
@@ -153,8 +158,9 @@
           <p>.dev Domain: <span class="${domainDev ? 'available' : 'taken'}">${domainDev ? '✅ Available' : '❌ Taken'}</span></p>
           <p>.shop Domain: <span class="${domainShop ? 'available' : 'taken'}">${domainShop ? '✅ Available' : '❌ Taken'}</span></p>
         `;
-        document.getElementById("showMoreBtn").style.display = "none";
-      }
-    </script>
+      document.getElementById("showMoreBtn").style.display = "none";
+    }
+  </script>
 </body>
+
 </html>
